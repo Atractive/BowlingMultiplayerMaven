@@ -70,6 +70,13 @@ public class MultiPlayerGameImplTest {
                 "Joueur Diego, tour n°1, boule n°1");
     }
     
+    @Test
+    public void lancerOnlyOne() throws Exception{
+        game.startNewGame(name);
+        rollMany(79,1);
+        assertEquals(game.scoreFor("Benjamin"),20);
+    }
+    
     @Test (expected = UnsupportedOperationException.class)
     public void lancerWrongkeel1() throws Exception {
         game.startNewGame(name);
