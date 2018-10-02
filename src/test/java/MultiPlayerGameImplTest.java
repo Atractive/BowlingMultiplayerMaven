@@ -20,8 +20,8 @@ public class MultiPlayerGameImplTest {
     
     @Test
     public void startNewGameTestGood() throws Exception {
-        assertEquals(game.startNewGame(name),
-                "Joueur Benjamin, tour n°1, boule n°1");
+        assertEquals("Joueur Benjamin, tour n°1, boule n°1",
+                game.startNewGame(name));
     }
     
     @Test (expected = UnsupportedOperationException.class)
@@ -43,38 +43,38 @@ public class MultiPlayerGameImplTest {
     @Test
     public void lancerBoule() throws Exception {
         game.startNewGame(name);
-        assertEquals(game.lancer(6),
-                "Joueur Benjamin, tour n°1, boule n°2");
+        assertEquals("Joueur Benjamin, tour n°1, boule n°2",
+                game.lancer(6));
     }
     
     @Test
     public void lancerJoueur() throws Exception {
         game.startNewGame(name);
         game.lancer(4);
-        assertEquals(game.lancer(6),
-                "Joueur Diego, tour n°1, boule n°1");
+        assertEquals("Joueur Diego, tour n°1, boule n°1",
+                game.lancer(6));
     }
     
     @Test
     public void lancertour() throws Exception {
         game.startNewGame(name);
         rollMany(7,3);
-        assertEquals(game.lancer(6),
-                "Joueur Benjamin, tour n°2, boule n°1");
+        assertEquals("Joueur Benjamin, tour n°2, boule n°1",
+                game.lancer(6));
     }
     
     @Test
     public void lancerStrike() throws Exception {
         game.startNewGame(name);
-        assertEquals(game.lancer(10),
-                "Joueur Diego, tour n°1, boule n°1");
+        assertEquals("Joueur Diego, tour n°1, boule n°1",
+                game.lancer(10));
     }
     
     @Test
     public void lancerOnlyOne() throws Exception{
         game.startNewGame(name);
         rollMany(79,1);
-        assertEquals(game.scoreFor("Benjamin"),20);
+        assertEquals(20,game.scoreFor("Benjamin"));
     }
     
     @Test (expected = UnsupportedOperationException.class)
@@ -105,14 +105,14 @@ public class MultiPlayerGameImplTest {
     public void scoreForTestGood() throws Exception {
         game.startNewGame(name);
         rollMany(2,3);
-        assertEquals(game.scoreFor("Benjamin"),6);
+        assertEquals(6,game.scoreFor("Benjamin"));
     }
     
     @Test
     public void scoreForTestWhenSomeoneElsePlay() throws Exception {
         game.startNewGame(name);
         rollMany(3,3);
-        assertEquals(game.scoreFor("Benjamin"),6);
+        assertEquals(6,game.scoreFor("Benjamin"));
     }
     
     @Test
@@ -124,7 +124,7 @@ public class MultiPlayerGameImplTest {
         rollMany(6,2);
         //Benjamin fait un 6 sur son 1er tour après le strike
         rollMany(2,3);
-        assertEquals(game.scoreFor("Benjamin"),22);
+        assertEquals(22,game.scoreFor("Benjamin"));
     }
     
     @Test
@@ -133,7 +133,8 @@ public class MultiPlayerGameImplTest {
         rollMany(2,5);
         rollMany(6,2);
         game.lancer(6);
-        assertEquals(game.scoreFor("Benjamin"),22);
+        game.lancer(2);
+        assertEquals(24,game.scoreFor("Benjamin"));
     }
     
 
@@ -165,10 +166,6 @@ public class MultiPlayerGameImplTest {
 
     private void rollStrike() throws Exception {
 	game.lancer(10);
-    }
-    
-    
-    
-    
+    }  
 
 }
